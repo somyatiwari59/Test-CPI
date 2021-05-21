@@ -1,0 +1,21 @@
+<template>
+    <lightning-card  title="All Accounts">
+        <div class="slds-p-horizontal_small">
+            <template for:each={Accounts} for:item="acc">
+                <div key={acc.Id}>
+                    {acc.Name} : <lightning-button data-accid={acc.Id} variant="base" label="Show Contacts" onclick={showContacts} ></lightning-button>
+                    <div if:true={acc.showContacts}>
+                        <div if:true={acc.contacts}>
+                            <template for:each={acc.contacts} for:item="con">
+                                <div key={acc.Id}>
+                                    {con.Name}, {con.PrimaryContact__c}
+                                    <lightning-button data-accid={acc.Id} data-conid={con.Id} variant="base" label="Make Primary" onclick={makeConPrimary} ></lightning-button>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>
